@@ -1,6 +1,6 @@
 package instructions;
 
-import instructionSet.InstructionSet;
+import stages.DataPath;
 import exception.NoSuchRegisterException;
 import abstracts.IFormat;
 

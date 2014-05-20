@@ -1,5 +1,6 @@
 package instructions;
 
+import stages.DataPath;
 import abstracts.JFormat;
 
 public class J extends JFormat {
