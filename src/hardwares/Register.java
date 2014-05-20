@@ -90,6 +90,6 @@ public class Register {
 			throws NoSuchRegisterException {
 		if (s.equals("$0"))
 			return;
-		getRgister(s).setValue(0);
+		getRgister(s).setValue(value);
 	}
 }
