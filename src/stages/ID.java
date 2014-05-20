@@ -1,12 +1,11 @@
 package stages;
 
+import instructionSet.InstructionString;
+import abstracts.Instruction;
+import abstracts.RFormat;
 import exception.NoSuchInstructionException;
 import exception.NoSuchRegisterException;
 import exception.OverFlowException;
-import abstracts.Instruction;
-import abstracts.RFormat;
-import instructionSet.InstructionString;
-import instructions.*;
 
 public class ID {
 
@@ -42,7 +41,7 @@ public class ID {
 			int value = Integer.parseInt(address_String[2]);
 			if (value > Short.MAX_VALUE || value < Short.MIN_VALUE) 
 				throw new OverFlowException("");
-			return new Add(rs, rt, rd);
+//			return new Add(rs, rt, rd);
 			
 		case "addi":
 			
