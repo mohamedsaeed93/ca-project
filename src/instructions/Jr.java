@@ -14,6 +14,10 @@ public class Jr extends JFormat {
 	public Jr(int address) {
 		super(address);
 	}
+	
+	public Jr() {
+		super();
+	}
 
 	@Override
 	public void exec() throws NoSuchRegisterException {

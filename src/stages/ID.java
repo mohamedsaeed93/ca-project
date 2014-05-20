@@ -1,12 +1,11 @@
 package stages;
 
+import instructionSet.InstructionString;
+import instructions.*;
+import abstracts.Instruction;
 import exception.NoSuchInstructionException;
 import exception.NoSuchRegisterException;
 import exception.OverFlowException;
-import abstracts.Instruction;
-import abstracts.RFormat;
-import instructionSet.InstructionString;
-import instructions.*;
 
 public class ID {
 
@@ -14,28 +13,13 @@ public class ID {
 		if(instruc == null)
 			throw new NoSuchInstructionException("No such instruchtion found");
 		
-		// getting the instruction class name
 		String opc = instruc.getOpcode();
-//		String className = instruc.getOpcode().toLowerCase();
-//		className = Character.toUpperCase(opc.charAt(0)) + opc.substring(1);
-//		Class instructionName;
-//		Object instructionClass;
-//		try {
-//			instructionName = Class.forName(className);
-////			instructionClass = instructionName.
-//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-//			throw new NoSuchInstructionException("No such instruchtion found");
-//		}
-		
 		String[] address_String = instruc.getRest().split(",");
-		String rs,rt,rd;
+		String[] rs_mem;
+		String rs,rt,rd,label;
+		int shiftAmount;
 		short address;
-//		
-//		if(instructionClass instanceof RFormat) {
-//			
-//		}
-//		
-		
+
 		switch (opc.toLowerCase()) {
 		case "add":
 			rs = address_String[1];
@@ -45,8 +29,7 @@ public class ID {
 			
 		case "addi":
 			rs = address_String[1];
-			rt = address_String[2];
-			rd = address_String[0];
+			rt = address_String[0];
 			if (Integer.parseInt(address_String[2]) > Short.MAX_VALUE ||
 				Integer.parseInt(address_String[2]) < Short.MIN_VALUE ) 
 				throw new OverFlowException("");
@@ -61,8 +44,7 @@ public class ID {
 			
 		case "andi":
 			rs = address_String[1];
-			rt = address_String[2];
-			rd = address_String[0];
+			rt = address_String[0];
 			if (Integer.parseInt(address_String[2]) > Short.MAX_VALUE ||
 				Integer.parseInt(address_String[2]) < Short.MIN_VALUE ) 
 				throw new OverFlowException("");
@@ -70,58 +52,96 @@ public class ID {
 			return new Andi(rs, rt, address);
 
 		case "beq":
+			rs = address_String[0];
+			rt = address_String[1];
+			label = address_String[2];
+			return new Beq(rs, rt, label);
+			
+		case "bne":
+			rs = address_String[0];
+			rt = address_String[1];
+			label = address_String[2];
+			return new Bne(rs, rt, label);
+
+		case "j":
+			label = address_String[0];
+			return new J(label);
+			
+		case "jal":
+			label = address_String[0];
+			return new Jal(label);
+			
+		case "jr":
+			return new Jr();
+			
+		case "lw":
+			rt = address_String[0];
+			rs_mem = address_String[1].split("(");
+			address = (short) Integer.parseInt(rs_mem[0],16);
+			rs = rs_mem[1].substring(0, rs_mem[1].length()-1);
+			return new Lw(rs, rt, address);
+			
+		case "nor":
 			rs = address_String[1];
 			rt = address_String[2];
 			rd = address_String[0];
-			return new Beq(rs, rt, rd);
+			return new Nor(rs, rt, rd);
 			
-		case "bne":
-			
-			break;
-		case "j":
-			
-			break;
-		case "jal":
-			
-			break;
-		case "jr":
-			
-			break;
-		case "lw":
-			
-			break;
-		case "nor":
-			
-			break;
 		case "or":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new Or(rs, rt, rd);
 			
-			break;
 		case "ori":
+			rs = address_String[1];
+			rt = address_String[0];
+			if (Integer.parseInt(address_String[2]) > Short.MAX_VALUE ||
+				Integer.parseInt(address_String[2]) < Short.MIN_VALUE ) 
+				throw new OverFlowException("");
+			address = (short)Integer.parseInt(address_String[2],16);
+			return new Ori(rs, rt, address);
 			
-			break;
 		case "sll":
+			rs = address_String[1];
+			rd = address_String[0];
+			shiftAmount = Integer.parseInt(address_String[0]);
+			return new Sll(rs, "", rd, shiftAmount);
 			
-			break;
 		case "slt":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new Slt(rs, rt, rd);
 			
-			break;
 		case "sltu":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new Sltu(rs, rt, rd);
 			
-			break;
-		case "sri":
+		case "srl":
+			rs = address_String[1];
+			rd = address_String[0];
+			shiftAmount = Integer.parseInt(address_String[0]);
+			return new Srl(rs, "", rd, shiftAmount);
 			
-			break;
 		case "sub":
-			
-			break;
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new Sub(rs, rt, rd);
+
 		case "sw":
-			
-			break;
+			rt = address_String[0];
+			rs_mem = address_String[1].split("(");
+			address = (short) Integer.parseInt(rs_mem[0],16);
+			rs = rs_mem[1].substring(0, rs_mem[1].length()-1);
+			return new Lw(rs, rt, address);
 
 		default:
 			throw new NoSuchInstructionException("No such instruchtion found");
 		}
-		return null;
 	}
 	
 }
