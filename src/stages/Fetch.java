@@ -1,4 +1,4 @@
-package Stages;
+package stages;
 
 import exception.NoSuchAddressException;
 import instructionSet.*;

@@ -9,14 +9,14 @@ public abstract class IFormat extends Instruction{
 	private short address;
 
 	public IFormat(String rs, String rt, short address) throws NoSuchRegisterException{
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
 		this.address = address;
 	}
 
 	public IFormat(String rs, String rt, String label) throws NoSuchRegisterException{
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
 		throw new UnsupportedOperationException();
 		//address = getAddress(label);
 	}

@@ -5,7 +5,7 @@ import abstracts.IFormat;
 
 public class Andi extends IFormat {
 
-	public Andi(String rs, String rt, int address)
+	public Andi(String rs, String rt, Short address)
 			throws NoSuchRegisterException {
 		super(rs, rt, address);
 	}

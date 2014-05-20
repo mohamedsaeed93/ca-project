@@ -5,7 +5,7 @@ import abstracts.IFormat;
 
 public class Ori extends IFormat {
 
-	public Ori(String rs, String rt, int address)
+	public Ori(String rs, String rt, Short address)
 			throws NoSuchRegisterException {
 		super(rs, rt, address);
 	}

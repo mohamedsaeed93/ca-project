@@ -1,4 +1,4 @@
-package Stages;
+package stages;
 
 import exception.NoSuchInstructionException;
 import exception.NoSuchRegisterException;
