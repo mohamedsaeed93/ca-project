@@ -1,21 +1,28 @@
 package Stages;
 
 import exception.NoSuchInstructionException;
+import exception.NoSuchRegisterException;
 import abstracts.Instruction;
 import instructionSet.InstructionString;
+import instructions.*;
 
 public class Decode {
 
-	public static Instruction id(InstructionString instruc) throws NoSuchInstructionException {
+	public static Instruction id(InstructionString instruc) throws NoSuchInstructionException, NoSuchRegisterException {
 		String opc = instruc.getOpcode();
-		
+		String[] rest = instruc.getRest().split(",");
+		String rs,rt,rd;
+		short address;
+
 		switch (opc.toLowerCase()) {
 		case "add":
+			rs = rest[1];
+			rt = rest[2];
+			rd = rest[0];
+			return new Add(rs, rt, rd);
 			
-			break;
 		case "addi":
-					
-			break;
+			
 		case "and":
 			
 			break;

@@ -6,9 +6,9 @@ import hardwares.Register;
 public abstract class IFormat extends Instruction{
 	private Register rs;
 	private Register rt;
-	private int address;
+	private short address;
 
-	public IFormat(String rs, String rt, int address) throws NoSuchRegisterException{
+	public IFormat(String rs, String rt, short address) throws NoSuchRegisterException{
 		this.rs = Register.getRgister(rs);
 		this.rt = Register.getRgister(rt);
 		this.address = address;
