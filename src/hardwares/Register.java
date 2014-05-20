@@ -71,12 +71,12 @@ public class Register {
 	}
 
 	// Get the value of the Register
-	private int getValue() {
+	public int getValue() {
 		return value;
 	}
 
 	// Set the value of the Register
-	private void setValue(int value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 
