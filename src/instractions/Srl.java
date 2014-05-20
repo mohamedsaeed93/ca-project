@@ -10,10 +10,6 @@ public class Srl extends RFormat {
 		super(rs, rt, rd, shiftAmount);
 	}
 
-	public Srl(String rs, String rt, String rd) throws NoSuchRegisterException {
-		super(rs, rt, rd);
-	}
-
 	@Override
 	public void exec() {
 		throw new UnsupportedOperationException();

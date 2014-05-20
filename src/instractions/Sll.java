@@ -10,10 +10,6 @@ public class Sll extends RFormat {
 		super(rs, rt, rd, shiftAmount);
 	}
 
-	public Sll(String rs, String rt, String rd) throws NoSuchRegisterException {
-		super(rs, rt, rd);
-	}
-
 	@Override
 	public void exec() {
 		throw new UnsupportedOperationException();

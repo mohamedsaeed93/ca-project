@@ -9,11 +9,6 @@ public class Sw extends IFormat {
 		super(rs, rt, address);
 	}
 
-	public Sw(String rs, String rt, String label)
-			throws NoSuchRegisterException {
-		super(rs, rt, label);
-	}
-
 	@Override
 	public void exec() {
 		throw new UnsupportedOperationException();

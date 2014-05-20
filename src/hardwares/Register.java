@@ -11,6 +11,7 @@ public class Register {
 	// Here all the Registers will be created and put in the HashTable
 	// (REGISTERS)
 	public static void init() {
+		REGISTERS.put("$0", new Register());
 		REGISTERS.put("$v0", new Register());
 		REGISTERS.put("$v1", new Register());
 		REGISTERS.put("$a0", new Register());
@@ -36,9 +37,9 @@ public class Register {
 		REGISTERS.put("$t8", new Register());
 		REGISTERS.put("$t9", new Register());
 	}
-	
+
 	// Create all Save Registers
-	private static void createSave(){
+	private static void createSave() {
 		REGISTERS.put("$s0", new Register());
 		REGISTERS.put("$s1", new Register());
 		REGISTERS.put("$s2", new Register());
@@ -48,9 +49,9 @@ public class Register {
 		REGISTERS.put("$s6", new Register());
 		REGISTERS.put("$s7", new Register());
 	}
-	
+
 	// Create all pointers Registers
-	private static void createPointers(){
+	private static void createPointers() {
 		REGISTERS.put("$gp", new Register());
 		REGISTERS.put("$sp", new Register());
 		REGISTERS.put("$fp", new Register());
@@ -64,26 +65,21 @@ public class Register {
 		return reg;
 	}
 
-	// Get the value stored in this register
-	private Register(int val) {
-		value = val;
-	}
-
 	// Init a new Register with value 0
 	private Register() {
 		value = 0;
 	}
 
 	// Get the value of the Register
-	public int getValue() {
+	private int getValue() {
 		return value;
 	}
 
 	// Set the value of the Register
-	public void setValue(int value) {
+	private void setValue(int value) {
 		this.value = value;
 	}
-	
+
 	// Get the value of the Register s
 	public static int getValue(String s) throws NoSuchRegisterException {
 		return getRgister(s).getValue();
@@ -92,6 +88,8 @@ public class Register {
 	// Set the value of the Register s
 	public static void setValue(String s, int value)
 			throws NoSuchRegisterException {
+		if (s.equals("$0"))
+			return;
 		getRgister(s).setValue(0);
 	}
 }
