@@ -11,16 +11,16 @@ public abstract class RFormat implements Instruction {
 	private int shiftAmount;
 	
 	public RFormat(String rs, String rt, String rd, int shiftAmount) throws NoSuchRegisterException {
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
-		this.rd = Register.getRgister(rd);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
+		this.rd = Register.getRegister(rd);
 		this.shiftAmount = shiftAmount;
 	}
 
 	public RFormat(String rs, String rt, String rd) throws NoSuchRegisterException {
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
-		this.rd = Register.getRgister(rd);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
+		this.rd = Register.getRegister(rd);
 		shiftAmount = 0;
 	}
 

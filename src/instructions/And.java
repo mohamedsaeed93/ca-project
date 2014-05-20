@@ -11,6 +11,7 @@ public class And extends RFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		int value = getRs().getValue() & getRt().getValue();
+		getRd().setValue(value);
 	}
 }

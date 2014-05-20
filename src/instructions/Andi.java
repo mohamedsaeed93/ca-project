@@ -12,6 +12,7 @@ public class Andi extends IFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		int value = getRs().getValue() & getAddress();
+		getRt().setValue(value);
 	}
 }

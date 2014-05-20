@@ -12,6 +12,7 @@ public class Bne extends IFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		if(getRs().getValue() != getRt().getValue())
+			DataPath.setPC(getAddress());
 	}
 }

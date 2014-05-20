@@ -11,6 +11,5 @@ public class Lw extends IFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
 	}
 }

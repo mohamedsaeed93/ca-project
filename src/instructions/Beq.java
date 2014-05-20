@@ -1,5 +1,6 @@
 package instructions;
 
+import instructionSet.InstructionSet;
 import exception.NoSuchRegisterException;
 import abstracts.IFormat;
 
@@ -12,6 +13,8 @@ public class Beq extends IFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		int value;
+		if(getRs().getValue() == getRt().getValue())
+			DataPath.setPC(getAddress());
 	}
 }

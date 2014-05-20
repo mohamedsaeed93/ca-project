@@ -1,5 +1,6 @@
 package instructions;
 
+import hardwares.Register;
 import abstracts.JFormat;
 
 public class Jr extends JFormat {
@@ -14,6 +15,6 @@ public class Jr extends JFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		DataPath.setPC(Register.getRegister("$ra").getValue());
 	}
 }
