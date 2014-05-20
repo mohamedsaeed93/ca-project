@@ -66,4 +66,8 @@ public class InstructionSet {
 		throw new NoSuchAddressException("The Instruction at address "
 				+ address + " doesnot Exist");
 	}
+
+	public boolean isFinished(int address) {
+		return InstructionSet.size() <= address;
+	}
 }
