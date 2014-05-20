@@ -1,5 +1,7 @@
 package instructions;
 
+import exception.NoSuchRegisterException;
+import stages.DataPath;
 import hardwares.Register;
 import abstracts.JFormat;
 
@@ -14,7 +16,7 @@ public class Jr extends JFormat {
 	}
 
 	@Override
-	public void exec() {
+	public void exec() throws NoSuchRegisterException {
 		DataPath.setPC(Register.getRegister("$ra").getValue());
 	}
 }
