@@ -13,6 +13,10 @@ public abstract class JFormat extends Instruction {
 		this.address = address;
 	}
 
+	public JFormat() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getAddress() {
 		return address;
 	}
