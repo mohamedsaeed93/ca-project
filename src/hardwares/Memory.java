@@ -1,8 +1,10 @@
 package hardwares;
 
+import exception.NoSuchAddressException;
+
 public class Memory {
 	private static Memory MEMORY = null;
-	private byte[] theMemory;
+	private int[] theMemory;
 
 	public static Memory get_instance(){
 		if (MEMORY == null)
@@ -11,15 +13,21 @@ public class Memory {
 	}
 
 	private Memory(){
-		theMemory = new byte[1000000];
+		theMemory = new int[1000000];
 	}
 
-	public int getData(int address){
-		return theMemory[address];
+	public int getData(int address) throws NoSuchAddressException{
+		if (address%4 != 0){
+			throw new NoSuchAddressException("Invalid address " + address);
+		}
+		return theMemory[address/4];
 	}
 
-	public void setData(int address, int data){
-		theMemory[address] = (byte)data;
+	public void setData(int address, int data) throws NoSuchAddressException{
+		if (address%4 != 0){
+			throw new NoSuchAddressException("Invalid address " + address);
+		}
+		theMemory[address/4] = data;
 	}
 
 	public byte getLeftHalf(int address){
