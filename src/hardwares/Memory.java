@@ -6,7 +6,7 @@ public class Memory {
 	private static Memory MEMORY = null;
 	private int[] theMemory;
 
-	public static Memory get_instance(){
+	public static Memory getInstance(){
 		if (MEMORY == null)
 			return MEMORY = new Memory();
 		return MEMORY;
