@@ -10,14 +10,14 @@ public abstract class IFormat implements Instruction{
 	private int address;
 
 	public IFormat(String rs, String rt, int address) throws NoSuchRegisterException{
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
 		this.address = address;
 	}
 
 	public IFormat(String rs, String rt, String label) throws NoSuchRegisterException{
-		this.rs = Register.getRgister(rs);
-		this.rt = Register.getRgister(rt);
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
 		throw new UnsupportedOperationException();
 		//address = getAddress(label);
 	}

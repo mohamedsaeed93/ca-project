@@ -58,7 +58,7 @@ public class Register {
 	}
 
 	// Get a register s from the table
-	public static Register getRgister(String s) throws NoSuchRegisterException {
+	public static Register getRegister(String s) throws NoSuchRegisterException {
 		Register reg = REGISTERS.get(s);
 		if (reg == null)
 			throw new NoSuchRegisterException(s);
@@ -82,7 +82,7 @@ public class Register {
 
 	// Get the value of the Register s
 	public static int getValue(String s) throws NoSuchRegisterException {
-		return getRgister(s).getValue();
+		return getRegister(s).getValue();
 	}
 
 	// Set the value of the Register s
@@ -90,6 +90,6 @@ public class Register {
 			throws NoSuchRegisterException {
 		if (s.equals("$0"))
 			return;
-		getRgister(s).setValue(value);
+		getRegister(s).setValue(value);
 	}
 }

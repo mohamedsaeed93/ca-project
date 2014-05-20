@@ -1,4 +1,4 @@
-package Stages;
+package stages;
 
 public class Fetch {
 
