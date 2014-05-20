@@ -8,7 +8,7 @@ import abstracts.RFormat;
 import instructionSet.InstructionString;
 import instructions.*;
 
-public class Decode {
+public class ID {
 
 	public static Instruction id(InstructionString instruc) throws NoSuchInstructionException, NoSuchRegisterException, OverFlowException {
 		if(instruc == null)
