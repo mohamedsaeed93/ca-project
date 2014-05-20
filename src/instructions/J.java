@@ -14,6 +14,6 @@ public class J extends JFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		DataPath.setPC(getAddress());
 	}
 }
