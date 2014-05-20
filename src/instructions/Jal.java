@@ -1,4 +1,4 @@
-package instractions;
+package instructions;
 
 import abstracts.JFormat;
 

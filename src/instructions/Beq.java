@@ -1,13 +1,13 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.IFormat;
 
-public class Andi extends IFormat {
+public class Beq extends IFormat {
 
-	public Andi(String rs, String rt, int address)
+	public Beq(String rs, String rt, String label)
 			throws NoSuchRegisterException {
-		super(rs, rt, address);
+		super(rs, rt, label);
 	}
 
 	@Override

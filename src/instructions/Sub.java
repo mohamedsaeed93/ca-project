@@ -1,11 +1,11 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.RFormat;
 
-public class Slt extends RFormat {
+public class Sub extends RFormat {
 
-	public Slt(String rs, String rt, String rd) throws NoSuchRegisterException {
+	public Sub(String rs, String rt, String rd) throws NoSuchRegisterException {
 		super(rs, rt, rd);
 	}
 

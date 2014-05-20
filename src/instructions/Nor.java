@@ -1,11 +1,11 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.RFormat;
 
-public class And extends RFormat {
+public class Nor extends RFormat {
 
-	public And(String rs, String rt, String rd) throws NoSuchRegisterException {
+	public Nor(String rs, String rt, String rd) throws NoSuchRegisterException {
 		super(rs, rt, rd);
 	}
 

@@ -1,14 +1,14 @@
-package instractions;
+package instructions;
 
 import abstracts.JFormat;
 
-public class J extends JFormat {
+public class Jr extends JFormat {
 
-	public J(String label) {
+	public Jr(String label) {
 		super(label);
 	}
 
-	public J(int address) {
+	public Jr(int address) {
 		super(address);
 	}
 

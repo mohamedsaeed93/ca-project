@@ -1,12 +1,11 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.IFormat;
 
-public class Ori extends IFormat {
+public class Sw extends IFormat {
 
-	public Ori(String rs, String rt, int address)
-			throws NoSuchRegisterException {
+	public Sw(String rs, String rt, int address) throws NoSuchRegisterException {
 		super(rs, rt, address);
 	}
 
@@ -14,5 +13,4 @@ public class Ori extends IFormat {
 	public void exec() {
 		throw new UnsupportedOperationException();
 	}
-
 }

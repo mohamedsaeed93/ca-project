@@ -1,11 +1,11 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.RFormat;
 
-public class Add extends RFormat {
+public class And extends RFormat {
 
-	public Add(String rs, String rt, String rd) throws NoSuchRegisterException {
+	public And(String rs, String rt, String rd) throws NoSuchRegisterException {
 		super(rs, rt, rd);
 	}
 
@@ -13,5 +13,4 @@ public class Add extends RFormat {
 	public void exec() {
 		throw new UnsupportedOperationException();
 	}
-
 }

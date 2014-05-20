@@ -2,9 +2,8 @@ package abstracts;
 
 import exception.NoSuchRegisterException;
 import hardwares.Register;
-import interfaces.Instruction;
 
-public abstract class IFormat implements Instruction{
+public abstract class IFormat extends Instruction{
 	private Register rs;
 	private Register rt;
 	private int address;

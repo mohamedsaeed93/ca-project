@@ -1,11 +1,11 @@
-package instractions;
+package instructions;
 
 import exception.NoSuchRegisterException;
 import abstracts.IFormat;
 
-public class Beq extends IFormat {
+public class Bne extends IFormat {
 
-	public Beq(String rs, String rt, String label)
+	public Bne(String rs, String rt, String label)
 			throws NoSuchRegisterException {
 		super(rs, rt, label);
 	}
