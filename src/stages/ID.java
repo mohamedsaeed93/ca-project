@@ -16,45 +16,65 @@ public class ID {
 		
 		// getting the instruction class name
 		String opc = instruc.getOpcode();
-		String className = instruc.getOpcode().toLowerCase();
-		className = Character.toUpperCase(opc.charAt(0)) + opc.substring(1);
-		Class instructionName;
-		Object instructionClass;
-		try {
-			instructionName = Class.forName(className);
-			instructionClass = instructionName.newInstance();
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			throw new NoSuchInstructionException("No such instruchtion found");
-		}
+//		String className = instruc.getOpcode().toLowerCase();
+//		className = Character.toUpperCase(opc.charAt(0)) + opc.substring(1);
+//		Class instructionName;
+//		Object instructionClass;
+//		try {
+//			instructionName = Class.forName(className);
+////			instructionClass = instructionName.
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+//			throw new NoSuchInstructionException("No such instruchtion found");
+//		}
 		
 		String[] address_String = instruc.getRest().split(",");
 		String rs,rt,rd;
 		short address;
-		
-		if(instructionClass instanceof RFormat)
-		
+//		
+//		if(instructionClass instanceof RFormat) {
+//			
+//		}
+//		
 		
 		switch (opc.toLowerCase()) {
 		case "add":
 			rs = address_String[1];
 			rt = address_String[2];
 			rd = address_String[0];
-			int value = Integer.parseInt(address_String[2]);
-			if (value > Short.MAX_VALUE || value < Short.MIN_VALUE) 
-				throw new OverFlowException("");
 			return new Add(rs, rt, rd);
 			
 		case "addi":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			if (Integer.parseInt(address_String[2]) > Short.MAX_VALUE ||
+				Integer.parseInt(address_String[2]) < Short.MIN_VALUE ) 
+				throw new OverFlowException("");
+			address = (short)Integer.parseInt(address_String[2],16);
+			return new Addi(rs, rt, address);
 			
 		case "and":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new And(rs, rt, rd);
 			
-			break;
 		case "andi":
-			
-			break;
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			if (Integer.parseInt(address_String[2]) > Short.MAX_VALUE ||
+				Integer.parseInt(address_String[2]) < Short.MIN_VALUE ) 
+				throw new OverFlowException("");
+			address = (short)Integer.parseInt(address_String[2],16);
+			return new Andi(rs, rt, address);
+
 		case "beq":
+			rs = address_String[1];
+			rt = address_String[2];
+			rd = address_String[0];
+			return new Beq(rs, rt, rd);
 			
-			break;
 		case "bne":
 			
 			break;
