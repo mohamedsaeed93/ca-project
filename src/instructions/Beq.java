@@ -13,7 +13,6 @@ public class Beq extends IFormat {
 
 	@Override
 	public void exec() {
-		int value;
 		if(getRs().getValue() == getRt().getValue())
 			DataPath.setPC(getAddress());
 	}

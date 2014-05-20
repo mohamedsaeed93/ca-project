@@ -1,8 +1,7 @@
 package abstracts;
 
-import interfaces.Instruction;
 
-public abstract class JFormat implements Instruction {
+public abstract class JFormat extends Instruction {
 	private int address;
 
 	public JFormat(String label){

@@ -11,8 +11,8 @@ public class Add extends RFormat {
 
 	@Override
 	public void exec() {
-		executed_value = getRs().getValue() + getRt().getValue();
-		getRd().setValue(value);
+		setExecutedValue(getRs().getValue() + getRt().getValue());
+		setRegisterWrite(true);
 	}
 
 }

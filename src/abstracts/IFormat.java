@@ -2,14 +2,13 @@ package abstracts;
 
 import exception.NoSuchRegisterException;
 import hardwares.Register;
-import interfaces.Instruction;
 
-public abstract class IFormat implements Instruction{
+public abstract class IFormat extends Instruction{
 	private Register rs;
 	private Register rt;
-	private int address;
+	private short address;
 
-	public IFormat(String rs, String rt, int address) throws NoSuchRegisterException{
+	public IFormat(String rs, String rt, short address) throws NoSuchRegisterException{
 		this.rs = Register.getRegister(rs);
 		this.rt = Register.getRegister(rt);
 		this.address = address;

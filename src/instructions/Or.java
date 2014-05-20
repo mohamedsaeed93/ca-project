@@ -11,7 +11,8 @@ public class Or extends RFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		setExecutedValue((getRs().getValue() | getRt().getValue()));
+		setRegisterWrite(true);	
 	}
 
 }
