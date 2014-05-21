@@ -1,20 +1,20 @@
 package abstracts;
 
+import exception.NoSuchLabelException;
+import instructionSet.InstructionSet;
 
 public abstract class JFormat extends Instruction {
 	private int address;
 
-	public JFormat(String label){
-		throw new UnsupportedOperationException();
-		//address = getAddress(label);
+	public JFormat(String label) throws NoSuchLabelException {
+		address = InstructionSet.getInstance().getAddress(label);
 	}
 
-	public JFormat(int address){
+	public JFormat(int address) {
 		this.address = address;
 	}
 
 	public JFormat() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getAddress() {

@@ -1,5 +1,6 @@
 package instructions;
 
+import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
 import stages.DataPath;
 import hardwares.Register;
@@ -7,7 +8,7 @@ import abstracts.JFormat;
 
 public class Jr extends JFormat {
 
-	public Jr(String label) {
+	public Jr(String label) throws NoSuchLabelException {
 		super(label);
 	}
 

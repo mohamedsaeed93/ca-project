@@ -68,6 +68,10 @@ public class InstructionSet {
 	}
 
 	public boolean isFinished(int address) {
-		return InstructionSet.size() <= address;
+		return InstructionSet.size() + 4 <= address || InstructionSet.isEmpty();
+	}
+
+	public boolean isFinished2(int address) {
+		return InstructionSet.size() <= address || InstructionSet.isEmpty();
 	}
 }

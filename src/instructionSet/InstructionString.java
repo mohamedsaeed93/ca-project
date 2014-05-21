@@ -7,10 +7,13 @@ public class InstructionString {
 	public InstructionString(String Instruction, int address) {
 		this.address = address;
 		int labeEnd = Instruction.indexOf(":");
-		if (labeEnd < 0)
-			labeEnd = 0;
-		label = Instruction.substring(0, labeEnd);
-		Instruction = Instruction.substring(labeEnd + 1).trim();
+		if (labeEnd < 0) {
+			label = "";
+			Instruction = Instruction.trim();
+		} else {
+			label = Instruction.substring(0, labeEnd).trim();
+			Instruction = Instruction.substring(labeEnd + 1).trim();
+		}
 		String[] notlabeled = Instruction.split(" ", 2);
 		try {
 			opcode = notlabeled[0];
@@ -18,6 +21,7 @@ public class InstructionString {
 		}
 		try {
 			rest = notlabeled[1];
+			rest = rest.replace(" ", "");
 		} catch (Exception e) {
 		}
 	}

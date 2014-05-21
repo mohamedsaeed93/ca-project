@@ -1,11 +1,12 @@
 package instructions;
 
+import exception.NoSuchLabelException;
 import stages.DataPath;
 import abstracts.JFormat;
 
 public class J extends JFormat {
 
-	public J(String label) {
+	public J(String label) throws NoSuchLabelException {
 		super(label);
 	}
 

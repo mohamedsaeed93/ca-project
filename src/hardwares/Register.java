@@ -5,12 +5,29 @@ import java.util.Hashtable;
 import exception.NoSuchRegisterException;
 
 public class Register {
+	private static Register REGISTER;
 	private int value;
-	private static Hashtable<String, Register> REGISTERS = new Hashtable<String, Register>();
+	private Hashtable<String, Register> REGISTERS = new Hashtable<String, Register>();
+
+	private static Register getInstance() {
+		if (REGISTER == null)
+			REGISTER = new Register(true);
+		return REGISTER;
+	}
+
+	// Init a new Register with value 0
+	private Register() {
+		value = 0;
+	}
+
+	private Register(boolean init) {
+		if (init)
+			init();
+	}
 
 	// Here all the Registers will be created and put in the HashTable
 	// (REGISTERS)
-	public static void init() {
+	public void init() {
 		REGISTERS.put("$0", new Register());
 		REGISTERS.put("$v0", new Register());
 		REGISTERS.put("$v1", new Register());
@@ -25,7 +42,7 @@ public class Register {
 	}
 
 	// Create All Temp Registers
-	private static void createTemps() {
+	private void createTemps() {
 		REGISTERS.put("$t0", new Register());
 		REGISTERS.put("$t1", new Register());
 		REGISTERS.put("$t2", new Register());
@@ -39,7 +56,7 @@ public class Register {
 	}
 
 	// Create all Save Registers
-	private static void createSave() {
+	private void createSave() {
 		REGISTERS.put("$s0", new Register());
 		REGISTERS.put("$s1", new Register());
 		REGISTERS.put("$s2", new Register());
@@ -51,7 +68,7 @@ public class Register {
 	}
 
 	// Create all pointers Registers
-	private static void createPointers() {
+	private void createPointers() {
 		REGISTERS.put("$gp", new Register());
 		REGISTERS.put("$sp", new Register());
 		REGISTERS.put("$fp", new Register());
@@ -59,15 +76,11 @@ public class Register {
 
 	// Get a register s from the table
 	public static Register getRegister(String s) throws NoSuchRegisterException {
-		Register reg = REGISTERS.get(s);
+		Register reg = getInstance().REGISTERS.get(s.trim());
 		if (reg == null)
-			throw new NoSuchRegisterException(s);
+			throw new NoSuchRegisterException(
+					"There is no such Register with the name " + s);
 		return reg;
-	}
-
-	// Init a new Register with value 0
-	private Register() {
-		value = 0;
 	}
 
 	// Get the value of the Register

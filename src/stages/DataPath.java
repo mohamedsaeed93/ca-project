@@ -1,16 +1,17 @@
 package stages;
 
+import instructionSet.InstructionSet;
+import instructionSet.InstructionString;
 import abstracts.Instruction;
 import exception.NoSuchAddressException;
 import exception.NoSuchInstructionException;
+import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
 import exception.OverFlowException;
-import instructionSet.InstructionSet;
-import instructionSet.InstructionString;
 
 public class DataPath {
 	private static DataPath DATAPATH;
-	private int PC = 0;
+	private int PC = 0, CLOCK = 0;
 	private InstructionSet InsSet = InstructionSet.getInstance();
 	private InstructionString FetchedInstruction;
 	private Instruction DecodedInstruction, ExecutedInstruction,
@@ -33,85 +34,73 @@ public class DataPath {
 		getInstance().PC = pC;
 	}
 
+	public void start2() throws InterruptedException {
+		CLOCK = 0;
+		PC = 0;
+		while (!InsSet.isFinished2(PC)) {
+			fetch();
+			CLOCK++;
+			decode();
+			CLOCK++;
+			execute();
+			CLOCK++;
+			memory();
+			CLOCK++;
+			writeBack();
+			CLOCK++;
+		}
+		System.out.println("The Clock now is " + CLOCK);
+	}
+
 	public void start() throws InterruptedException {
+		CLOCK = 0;
+		PC = 0;
 		while (!InsSet.isFinished(PC)) {
-			new Thread(fetch).start();
-			new Thread(decode).start();
-			new Thread(execute).start();
-			new Thread(memory).start();
-			new Thread(writeBack).start();
-			Thread.sleep(1000);
+			writeBack();
+			memory();
+			execute();
+			decode();
+			fetch();
+			CLOCK++;
+		}
+		System.out.println("The Clock now is " + CLOCK);
+	}
+
+	private void fetch() {
+		FetchedInstruction = IF.fetch(PC);
+		PC++;
+	}
+
+	private void decode() {
+		try {
+			Instruction temp = ID.id(FetchedInstruction);
+			DecodedInstruction = temp;
+		} catch (NoSuchInstructionException | NoSuchRegisterException
+				| OverFlowException | NoSuchLabelException e) {
+			e.printStackTrace();
 		}
 	}
 
-	private Runnable fetch = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				FetchedInstruction = IF.fetch(PC);
-			} catch (NoSuchAddressException e) {
-				PC = Integer.MAX_VALUE;
-				e.printStackTrace();
-			}
+	private void execute() {
+		try {
+			EXEC.exec(DecodedInstruction);
+			ExecutedInstruction = DecodedInstruction;
+		} catch (NoSuchRegisterException e) {
+			e.printStackTrace();
 		}
-	};
+	}
 
-	private Runnable decode = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				Instruction temp = ID.id(FetchedInstruction);
-				Thread.sleep(50);
-				DecodedInstruction = temp;
-			} catch (NoSuchInstructionException | NoSuchRegisterException
-					| OverFlowException | InterruptedException e) {
-				PC = Integer.MAX_VALUE;
-				e.printStackTrace();
-			}
+	private void memory() {
+		try {
+			MEM.readOrWrite(ExecutedInstruction);
+			MemoryInstruction = ExecutedInstruction;
+		} catch (NoSuchAddressException e) {
+			e.printStackTrace();
 		}
-	};
+	}
 
-	private Runnable execute = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				EXEC.exec(DecodedInstruction);
-				Thread.sleep(50);
-				ExecutedInstruction = DecodedInstruction;
-			} catch (NoSuchRegisterException | InterruptedException e) {
-				PC = Integer.MAX_VALUE;
-				e.printStackTrace();
-			}
-		}
-	};
-
-	private Runnable memory = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(50);
-			} catch (Exception e) {
-				PC = Integer.MAX_VALUE;
-				e.printStackTrace();
-			}
-		}
-	};
-
-	private Runnable writeBack = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(50);
-			} catch (Exception e) {
-				PC = Integer.MAX_VALUE;
-				e.printStackTrace();
-			}
-		}
-	};
+	private void writeBack() {
+		WB.RegistetWriteBack(MemoryInstruction);
+	}
 
 }

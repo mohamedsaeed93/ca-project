@@ -1,24 +1,34 @@
 package abstracts;
 
+import instructionSet.InstructionSet;
+import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
 import hardwares.Register;
 
-public abstract class IFormat extends Instruction{
+public abstract class IFormat extends Instruction {
 	private Register rs;
 	private Register rt;
-	private short address;
+	private int address;
 
-	public IFormat(String rs, String rt, short address) throws NoSuchRegisterException{
+	public IFormat(String rs, String rt, short address)
+			throws NoSuchRegisterException {
 		this.rs = Register.getRegister(rs);
 		this.rt = Register.getRegister(rt);
 		this.address = address;
 	}
 
-	public IFormat(String rs, String rt, String label) throws NoSuchRegisterException{
+	public IFormat(String rs, String rt, int address)
+			throws NoSuchRegisterException {
 		this.rs = Register.getRegister(rs);
 		this.rt = Register.getRegister(rt);
-		throw new UnsupportedOperationException();
-		//address = getAddress(label);
+		this.address = address;
+	}
+
+	public IFormat(String rs, String rt, String label)
+			throws NoSuchRegisterException, NoSuchLabelException {
+		this.rs = Register.getRegister(rs);
+		this.rt = Register.getRegister(rt);
+		address = InstructionSet.getInstance().getAddress(label);
 	}
 
 	public Register getRs() {
