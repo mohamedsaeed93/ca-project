@@ -12,6 +12,7 @@ public class Srl extends RFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		setExecutedValue(getRs().getValue() >>> getShiftAmount());
+		setRegisterWrite(true);
 	}
 }

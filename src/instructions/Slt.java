@@ -11,6 +11,7 @@ public class Slt extends RFormat {
 
 	@Override
 	public void exec() {
-		throw new UnsupportedOperationException();
+		setExecutedValue((getRs().getValue() < getRt().getValue()) ? 1 : 0);
+		setRegisterWrite(true);
 	}
 }
