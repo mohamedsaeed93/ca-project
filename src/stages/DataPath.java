@@ -1,5 +1,6 @@
 package stages;
 
+import hardwares.Register;
 import instructionSet.InstructionSet;
 import instructionSet.InstructionString;
 import abstracts.Instruction;
@@ -34,9 +35,10 @@ public class DataPath {
 		getInstance().PC = pC;
 	}
 
-	public void start2() throws InterruptedException {
+	public void start() throws InterruptedException {
 		CLOCK = 0;
 		PC = 0;
+		Register.reset();
 		while (!InsSet.isFinished2(PC)) {
 			fetch();
 			CLOCK++;
@@ -52,9 +54,10 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	public void start() throws InterruptedException {
+	public void PiplineStart() throws InterruptedException {
 		CLOCK = 0;
 		PC = 0;
+		Register.reset();
 		while (!InsSet.isFinished(PC)) {
 			writeBack();
 			memory();

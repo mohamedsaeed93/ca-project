@@ -105,4 +105,10 @@ public class Register {
 			return;
 		getRegister(s).setValue(value);
 	}
+
+	public static void reset() {
+		for (Register r : Register.getInstance().REGISTERS.values()) {
+			r.setValue(0);
+		}
+	}
 }
