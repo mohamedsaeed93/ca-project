@@ -17,6 +17,8 @@ public class Memory {
 	}
 
 	public int getData(int address) throws NoSuchAddressException {
+		if(address > theMemory.length || address < 0)
+			throw new NoSuchAddressException("the address for the memory is not valid");
 		return theMemory[address];
 	}
 
