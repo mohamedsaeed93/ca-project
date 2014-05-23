@@ -58,6 +58,10 @@ public class InstructionSet {
 					+ " doesnot Exist");
 		return temp.getAddress();
 	}
+	
+	public int getSize() {
+		return InstructionSet.size();
+	}
 
 	public InstructionString getInstruction(int address)
 			throws NoSuchAddressException {

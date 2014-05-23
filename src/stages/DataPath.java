@@ -34,9 +34,10 @@ public class DataPath {
 		getInstance().PC = pC;
 	}
 
-	public void start2() throws InterruptedException {
+	public void start2(int address) throws InterruptedException {
+		if(address < InsSet.getSize())
+			PC = address;
 		CLOCK = 0;
-		PC = 0;
 		while (!InsSet.isFinished2(PC)) {
 			fetch();
 			CLOCK++;
@@ -52,9 +53,10 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	public void start() throws InterruptedException {
+	public void start(int address) throws InterruptedException {
+		if(address < InsSet.getSize())
+			PC = address;
 		CLOCK = 0;
-		PC = 0;
 		while (!InsSet.isFinished(PC)) {
 			writeBack();
 			memory();
