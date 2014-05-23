@@ -9,19 +9,20 @@ import java.util.List;
 
 import exception.NoSuchAddressException;
 import exception.NoSuchLabelException;
+import exception.SyntaxErrorException;
 
 public class InstructionSet {
 	private static InstructionSet SET = null;
 	private static Hashtable<String, InstructionString> labels;
 	private static List<InstructionString> InstructionSet;
 
-	public static InstructionSet getInstance() {
+	public static InstructionSet getInstance() throws SyntaxErrorException {
 		if (SET == null)
 			SET = new InstructionSet();
 		return SET;
 	}
 
-	public void init() {
+	public void init() throws SyntaxErrorException {
 
 		try {
 			FileReader fr = new FileReader("Instructions");
@@ -31,6 +32,7 @@ public class InstructionSet {
 			String temp;
 			while (bf.ready()) {
 				temp = bf.readLine();
+				temp = temp.replaceAll("//.*", "");
 				if (temp.isEmpty())
 					continue;
 				instruction = new InstructionString(temp, i);
@@ -45,7 +47,7 @@ public class InstructionSet {
 		}
 	}
 
-	private InstructionSet() {
+	private InstructionSet() throws SyntaxErrorException {
 		labels = new Hashtable<String, InstructionString>();
 		InstructionSet = new ArrayList<InstructionString>();
 		init();
