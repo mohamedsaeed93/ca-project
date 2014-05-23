@@ -1,12 +1,13 @@
 package abstracts;
 
 import exception.NoSuchRegisterException;
+import exception.SyntaxErrorException;
 
 public abstract class Instruction {
 	private int executedValue;
 	private boolean registerWrite = false;
 	
-	public abstract void exec() throws NoSuchRegisterException;
+	public abstract void exec() throws NoSuchRegisterException, SyntaxErrorException;
 
 	public int getExecutedValue() {
 		return executedValue;

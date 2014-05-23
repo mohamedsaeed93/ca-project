@@ -1,12 +1,13 @@
 package instructions;
 
 import exception.NoSuchLabelException;
+import exception.SyntaxErrorException;
 import stages.DataPath;
 import abstracts.JFormat;
 
 public class J extends JFormat {
 
-	public J(String label) throws NoSuchLabelException {
+	public J(String label) throws NoSuchLabelException, SyntaxErrorException {
 		super(label);
 	}
 
@@ -15,7 +16,7 @@ public class J extends JFormat {
 	}
 
 	@Override
-	public void exec() {
+	public void exec() throws SyntaxErrorException {
 		DataPath.setPC(getAddress());
 	}
 }

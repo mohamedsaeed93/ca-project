@@ -9,33 +9,35 @@ import exception.NoSuchInstructionException;
 import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
 import exception.OverFlowException;
+import exception.SyntaxErrorException;
 
 public class DataPath {
 	private static DataPath DATAPATH;
 	private int PC = 0, CLOCK = 0;
-	private InstructionSet InsSet = InstructionSet.getInstance();
+	private InstructionSet InsSet;
 	private InstructionString FetchedInstruction;
 	private Instruction DecodedInstruction, ExecutedInstruction,
 			MemoryInstruction;
 
-	public static DataPath getInstance() {
+	public static DataPath getInstance() throws SyntaxErrorException {
 		if (DATAPATH == null)
 			DATAPATH = new DataPath();
 		return DATAPATH;
 	}
 
-	private DataPath() {
+	private DataPath() throws SyntaxErrorException {
+		InsSet = InstructionSet.getInstance();
 	}
 
-	public static int getPC() {
+	public static int getPC() throws SyntaxErrorException {
 		return getInstance().PC;
 	}
 
-	public static void setPC(int pC) {
+	public static void setPC(int pC) throws SyntaxErrorException {
 		getInstance().PC = pC;
 	}
 
-	public void start() throws InterruptedException {
+	public void start() throws InterruptedException, SyntaxErrorException {
 		CLOCK = 0;
 		PC = 0;
 		Register.reset();
@@ -54,7 +56,8 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	public void PiplineStart() throws InterruptedException {
+	public void PiplineStart() throws InterruptedException,
+			SyntaxErrorException {
 		CLOCK = 0;
 		PC = 0;
 		Register.reset();
@@ -69,12 +72,12 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	private void fetch() {
+	private void fetch() throws SyntaxErrorException {
 		FetchedInstruction = IF.fetch(PC);
 		PC++;
 	}
 
-	private void decode() {
+	private void decode() throws SyntaxErrorException {
 		try {
 			Instruction temp = ID.id(FetchedInstruction);
 			DecodedInstruction = temp;
@@ -84,7 +87,7 @@ public class DataPath {
 		}
 	}
 
-	private void execute() {
+	private void execute() throws SyntaxErrorException {
 		try {
 			EXEC.exec(DecodedInstruction);
 			ExecutedInstruction = DecodedInstruction;
@@ -104,6 +107,10 @@ public class DataPath {
 
 	private void writeBack() {
 		WB.RegistetWriteBack(MemoryInstruction);
+	}
+
+	public static void IncPC() throws SyntaxErrorException {
+		getInstance().PC++;
 	}
 
 }

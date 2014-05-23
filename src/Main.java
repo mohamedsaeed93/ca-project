@@ -1,8 +1,11 @@
 import hardwares.Register;
 import stages.DataPath;
+import utilities.SyntaxChecker;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		String s = "addi $t1, $t0, -2";
+//		System.out.println(SyntaxChecker.checkINo(s));
 		DataPath.getInstance().PiplineStart();
 		System.out.println("$t0 is " + Register.getValue("$t0"));
 		System.out.println("$t1 is " + Register.getValue("$t1"));
