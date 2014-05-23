@@ -13,7 +13,7 @@ public class Memory {
 	}
 
 	private Memory() {
-		theMemory = new int[10000];
+		theMemory = new int[1000];
 	}
 
 	public int getData(int address) throws NoSuchAddressException {
@@ -41,5 +41,14 @@ public class Memory {
 	public void setRightHalf(int address, int data) {
 		int zero = ~((1 << 4) - 1) & theMemory[address];
 		theMemory[address] = (byte) (data | zero);
+	}
+	
+	public void setValue(int value, int address) {
+		 theMemory[address] = value;
+	}
+	
+	public void reset() {
+		for(int i=0; i < theMemory.length; i++)
+		 theMemory[i] = 0;
 	}
 }

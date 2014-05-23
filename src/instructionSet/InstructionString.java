@@ -1,14 +1,18 @@
 package instructionSet;
 
-public class InstructionString {
-	private String label, opcode, rest;
-	private int address;
+import exception.SyntaxErrorException;
+import utilities.SyntaxChecker;
 
-	public InstructionString(String Instruction, int address) {
+public class InstructionString {
+	private String label = "", opcode = "", rest = "";
+	private int address = 0;
+
+	public InstructionString(String Instruction, int address)
+			throws SyntaxErrorException {
+		SyntaxChecker.check(Instruction);
 		this.address = address;
 		int labeEnd = Instruction.indexOf(":");
 		if (labeEnd < 0) {
-			label = "";
 			Instruction = Instruction.trim();
 		} else {
 			label = Instruction.substring(0, labeEnd).trim();

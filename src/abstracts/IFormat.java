@@ -3,6 +3,7 @@ package abstracts;
 import instructionSet.InstructionSet;
 import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
+import exception.SyntaxErrorException;
 import hardwares.Register;
 
 public abstract class IFormat extends Instruction {
@@ -25,7 +26,7 @@ public abstract class IFormat extends Instruction {
 	}
 
 	public IFormat(String rs, String rt, String label)
-			throws NoSuchRegisterException, NoSuchLabelException {
+			throws NoSuchRegisterException, NoSuchLabelException, SyntaxErrorException {
 		this.rs = Register.getRegister(rs);
 		this.rt = Register.getRegister(rt);
 		address = InstructionSet.getInstance().getAddress(label);

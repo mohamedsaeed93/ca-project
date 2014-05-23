@@ -1,15 +1,15 @@
 package instructions;
 
-import instructionSet.InstructionSet;
+import hardwares.Register;
+import stages.DataPath;
+import abstracts.JFormat;
 import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
-import stages.DataPath;
-import hardwares.Register;
-import abstracts.JFormat;
+import exception.SyntaxErrorException;
 
 public class Jal extends JFormat {
 
-	public Jal(String label) throws NoSuchLabelException {
+	public Jal(String label) throws NoSuchLabelException, SyntaxErrorException {
 		super(label);
 	}
 
@@ -18,7 +18,7 @@ public class Jal extends JFormat {
 	}
 
 	@Override
-	public void exec() throws NoSuchRegisterException {
+	public void exec() throws NoSuchRegisterException, SyntaxErrorException {
 		Register.getRegister("$ra").setValue(DataPath.getPC());
 		DataPath.setPC(getAddress());
 	}

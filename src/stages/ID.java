@@ -7,12 +7,13 @@ import exception.NoSuchInstructionException;
 import exception.NoSuchLabelException;
 import exception.NoSuchRegisterException;
 import exception.OverFlowException;
+import exception.SyntaxErrorException;
 
 public class ID {
 
 	public static Instruction id(InstructionString instruc)
 			throws NoSuchInstructionException, NoSuchRegisterException,
-			OverFlowException, NoSuchLabelException {
+			OverFlowException, NoSuchLabelException, SyntaxErrorException {
 		if (instruc == null)
 			return null;
 
