@@ -71,11 +71,11 @@ public class InstructionSet {
 				+ address + " doesnot Exist");
 	}
 
-	public boolean isFinished(int address) {
+	public boolean isFinishedPiplined(int address) {
 		return InstructionSet.size() + 4 <= address || InstructionSet.isEmpty();
 	}
 
-	public boolean isFinished2(int address) {
+	public boolean isFinished(int address) {
 		return InstructionSet.size() <= address || InstructionSet.isEmpty();
 	}
 }

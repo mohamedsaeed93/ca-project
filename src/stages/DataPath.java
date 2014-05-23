@@ -1,5 +1,6 @@
 package stages;
 
+import hardwares.Register;
 import instructionSet.InstructionSet;
 import instructionSet.InstructionString;
 import abstracts.Instruction;
@@ -34,11 +35,12 @@ public class DataPath {
 		getInstance().PC = pC;
 	}
 
-	public void start2(int address) throws InterruptedException {
+	public void start(int address) throws InterruptedException {
 		if(address < InsSet.getSize())
 			PC = address;
 		CLOCK = 0;
-		while (!InsSet.isFinished2(PC)) {
+		Register.reset();
+		while (!InsSet.isFinished(PC)) {
 			fetch();
 			CLOCK++;
 			decode();
@@ -53,11 +55,12 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	public void start(int address) throws InterruptedException {
+	public void PiplineStart(int address) throws InterruptedException {
+		CLOCK = 0;
 		if(address < InsSet.getSize())
 			PC = address;
-		CLOCK = 0;
-		while (!InsSet.isFinished(PC)) {
+		Register.reset();
+		while (!InsSet.isFinishedPiplined(PC)) {
 			writeBack();
 			memory();
 			execute();
