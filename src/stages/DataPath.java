@@ -37,11 +37,13 @@ public class DataPath {
 		getInstance().PC = pC;
 	}
 
-	public void start() throws InterruptedException, SyntaxErrorException {
+	public void start(int address) throws InterruptedException,
+			SyntaxErrorException {
+		if (address < InsSet.getSize())
+			PC = address;
 		CLOCK = 0;
-		PC = 0;
 		Register.reset();
-		while (!InsSet.isFinished2(PC)) {
+		while (!InsSet.isFinished(PC)) {
 			fetch();
 			CLOCK++;
 			decode();
@@ -56,12 +58,13 @@ public class DataPath {
 		System.out.println("The Clock now is " + CLOCK);
 	}
 
-	public void PiplineStart() throws InterruptedException,
+	public void PiplineStart(int address) throws InterruptedException,
 			SyntaxErrorException {
 		CLOCK = 0;
-		PC = 0;
+		if (address < InsSet.getSize())
+			PC = address;
 		Register.reset();
-		while (!InsSet.isFinished(PC)) {
+		while (!InsSet.isFinishedPiplined(PC)) {
 			writeBack();
 			memory();
 			execute();

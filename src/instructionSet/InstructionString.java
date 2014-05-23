@@ -13,7 +13,6 @@ public class InstructionString {
 		this.address = address;
 		int labeEnd = Instruction.indexOf(":");
 		if (labeEnd < 0) {
-			label = "";
 			Instruction = Instruction.trim();
 		} else {
 			label = Instruction.substring(0, labeEnd).trim();
