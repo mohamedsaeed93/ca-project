@@ -51,6 +51,7 @@ public class Main extends JFrame implements ActionListener {
 		table.setFillsViewportHeight(true);		
 
 		rightPanel.setLayout(new BorderLayout());
+		table.setBackground(new Color(245,245,245));
 		rightPanel.add(table);
 		
 		console_area.setBackground(new Color(240,240,240));
