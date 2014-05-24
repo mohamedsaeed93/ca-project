@@ -2,10 +2,11 @@ import hardwares.Register;
 
 import java.awt.BorderLayout;
 import java.awt.Checkbox;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import exception.NoSuchRegisterException;
@@ -25,30 +27,82 @@ public class Main extends JFrame implements ActionListener
 {
 	JButton run = new JButton("Run");
 	JCheckBox myCheckBox = new JCheckBox("pipelined");
-	JTextArea code_area = new JTextArea("");
-	JTextArea console_area = new JTextArea("");
+	JTextArea code_area = new JTextArea();
+	JTextArea console_area = new JTextArea();
 	JPanel bottomPanel = new JPanel();
+	JPanel rightPanel = new JPanel();
+	JPanel leftPanel = new JPanel();
 	JPanel holdAll = new JPanel();
+	JTable table = new JTable();
 
-	public Main() {
+	public Main() throws NoSuchRegisterException {
 		bottomPanel.setLayout(new FlowLayout());
 		bottomPanel.add(myCheckBox);
 		bottomPanel.add(run);
 
-		holdAll.setLayout(new BorderLayout());
-		holdAll.add(bottomPanel, BorderLayout.SOUTH);
-		holdAll.add(code_area, BorderLayout.NORTH);
-		holdAll.add(console_area, BorderLayout.CENTER);
-
 		getContentPane().add(holdAll, BorderLayout.CENTER);
+		
+		table = redraw(table);
+		table.setFillsViewportHeight(true);		
 
+		rightPanel.setLayout(new BorderLayout());
+		rightPanel.add(table);
+		
+		console_area.setBackground(new Color(240,240,240));
+		console_area.setEditable(false);
+		leftPanel.setLayout(new BorderLayout());
+		leftPanel.add(code_area, BorderLayout.NORTH);
+		leftPanel.add(console_area, BorderLayout.CENTER);
+		holdAll.setLayout(new BorderLayout());
+		holdAll.add(rightPanel, BorderLayout.EAST);
+		holdAll.add(leftPanel, BorderLayout.CENTER);
+		holdAll.add(bottomPanel, BorderLayout.SOUTH);
+
+		
 		run.addActionListener(this);
 		myCheckBox.addActionListener(this);
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public static void main(String[] args) {
+	private JTable redraw(JTable table2) throws NoSuchRegisterException {
+		String[] columnNames = {"Name",
+        "Value"};
+			Object[][] data = {
+				    {"$0", Register.getValue("$0"),},
+				    {"$v0", Register.getValue("$v0"),},
+				    {"$v1", Register.getValue("$v1"),},
+				    {"$a0", Register.getValue("$a0"),},
+				    {"$a1", Register.getValue("$a1"),},
+				    {"$a2", Register.getValue("$a2"),},
+				    {"$t0", Register.getValue("$t0"),},
+				    {"$t1", Register.getValue("$t1"),},
+				    {"$t2", Register.getValue("$t2"),},
+				    {"$t3", Register.getValue("$t3"),},
+				    {"$t4", Register.getValue("$t4"),},
+				    {"$t5", Register.getValue("$t5"),},
+				    {"$t6", Register.getValue("$t6"),},
+				    {"$t7", Register.getValue("$t7"),},
+				    {"$t8", Register.getValue("$t8"),},
+				    {"$t9", Register.getValue("$t9"),},
+				    {"$s0", Register.getValue("$s0"),},
+				    {"$s1", Register.getValue("$s1"),},
+				    {"$s2", Register.getValue("$s2"),},
+				    {"$s3", Register.getValue("$s3"),},
+				    {"$s4", Register.getValue("$s4"),},
+				    {"$s5", Register.getValue("$s5"),},
+				    {"$s6", Register.getValue("$s6"),},
+				    {"$s7", Register.getValue("$s7"),},
+				    {"$gp", Register.getValue("$gp"),},
+				    {"$sp", Register.getValue("$sp"),},
+				    {"$fp", Register.getValue("$fp"),},
+			};
+			
+					table = new JTable(data, columnNames);
+	return table;		
+	}
+
+	public static void main(String[] args) throws NoSuchRegisterException {
 		Main myApplication = new Main();
 
 		myApplication.setLocation(10, 10);
@@ -86,16 +140,50 @@ public class Main extends JFrame implements ActionListener
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+				console_area.setText(null);
+				console_area.append("compilation successful\n");
 				try {
-					console_area.append("$t0 is " + Register.getValue("$t0") +"\n");
-					console_area.append("$t1 is " + Register.getValue("$t1") +"\n");
-					console_area.append("$t2 is " + Register.getValue("$t2") +"\n");	
-				} catch (NoSuchRegisterException e2) {
+					Object[][] data = {
+						    {"$0", Register.getValue("$0"),},
+						    {"$v0", Register.getValue("$v0"),},
+						    {"$v1", Register.getValue("$v1"),},
+						    {"$a0", Register.getValue("$a0"),},
+						    {"$a1", Register.getValue("$a1"),},
+						    {"$a2", Register.getValue("$a2"),},
+						    {"$t0", Register.getValue("$t0"),},
+						    {"$t1", Register.getValue("$t1"),},
+						    {"$t2", Register.getValue("$t2"),},
+						    {"$t3", Register.getValue("$t3"),},
+						    {"$t4", Register.getValue("$t4"),},
+						    {"$t5", Register.getValue("$t5"),},
+						    {"$t6", Register.getValue("$t6"),},
+						    {"$t7", Register.getValue("$t7"),},
+						    {"$t8", Register.getValue("$t8"),},
+						    {"$t9", Register.getValue("$t9"),},
+						    {"$s0", Register.getValue("$s0"),},
+						    {"$s1", Register.getValue("$s1"),},
+						    {"$s2", Register.getValue("$s2"),},
+						    {"$s3", Register.getValue("$s3"),},
+						    {"$s4", Register.getValue("$s4"),},
+						    {"$s5", Register.getValue("$s5"),},
+						    {"$s6", Register.getValue("$s6"),},
+						    {"$s7", Register.getValue("$s7"),},
+						    {"$gp", Register.getValue("$gp"),},
+						    {"$sp", Register.getValue("$sp"),},
+						    {"$fp", Register.getValue("$fp"),},
+					};
+					String[] columnNames = {"Name",
+	                "Value"};
+					rightPanel.remove(table);
+					table = new JTable(data, columnNames);
+					rightPanel.add(table);
+					rightPanel.repaint();
+
+				} catch (NoSuchRegisterException e1) {
 					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					e1.printStackTrace();
 				}
+
 			}else {
 				System.err.println("non-pipelined");
 				try {
@@ -109,10 +197,46 @@ public class Main extends JFrame implements ActionListener
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				console_area.setText(null);
+				console_area.append("compilation successful\n");
 				try {
-					console_area.append("$t0 is " + Register.getValue("$t0") +"\n");
-					console_area.append("$t1 is " + Register.getValue("$t1") +"\n");
-					console_area.append("$t2 is " + Register.getValue("$t2") +"\n");	
+					Object[][] data = {
+						    {"$0", Register.getValue("$0"),},
+						    {"$v0", Register.getValue("$v0"),},
+						    {"$v1", Register.getValue("$v1"),},
+						    {"$a0", Register.getValue("$a0"),},
+						    {"$a1", Register.getValue("$a1"),},
+						    {"$a2", Register.getValue("$a2"),},
+						    {"$t0", Register.getValue("$t0"),},
+						    {"$t1", Register.getValue("$t1"),},
+						    {"$t2", Register.getValue("$t2"),},
+						    {"$t3", Register.getValue("$t3"),},
+						    {"$t4", Register.getValue("$t4"),},
+						    {"$t5", Register.getValue("$t5"),},
+						    {"$t6", Register.getValue("$t6"),},
+						    {"$t7", Register.getValue("$t7"),},
+						    {"$t8", Register.getValue("$t8"),},
+						    {"$t9", Register.getValue("$t9"),},
+						    {"$s0", Register.getValue("$s0"),},
+						    {"$s1", Register.getValue("$s1"),},
+						    {"$s2", Register.getValue("$s2"),},
+						    {"$s3", Register.getValue("$s3"),},
+						    {"$s4", Register.getValue("$s4"),},
+						    {"$s5", Register.getValue("$s5"),},
+						    {"$s6", Register.getValue("$s6"),},
+						    {"$s7", Register.getValue("$s7"),},
+						    {"$gp", Register.getValue("$gp"),},
+						    {"$sp", Register.getValue("$sp"),},
+						    {"$fp", Register.getValue("$fp"),},
+					};
+					String[] columnNames = {"Name",
+	                "Value"};
+					rightPanel.remove(table);
+					table = new JTable(data, columnNames);
+					rightPanel.add(table);
+					rightPanel.repaint();
+
+					
 				} catch (NoSuchRegisterException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
