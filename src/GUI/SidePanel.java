@@ -1,17 +1,16 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
 public class SidePanel extends JPanel{
 	
 	public SidePanel() {
-		this.setLayout(new BorderLayout());
-		this.setBackground(Color.red);
+		this.setLayout(new FlowLayout());
+		this.setBackground(new Color(133,133,133));
 		this.setVisible(true);
-		this.setSize(20,20);
 	}
 
 }

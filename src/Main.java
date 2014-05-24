@@ -1,11 +1,12 @@
 import hardwares.Register;
 
 import java.awt.BorderLayout;
-import java.awt.Checkbox;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -14,11 +15,12 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import stages.DataPath;
 import exception.NoSuchRegisterException;
 import exception.SyntaxErrorException;
-import stages.DataPath;
 
 public class Main extends JFrame implements ActionListener
 
@@ -29,7 +31,7 @@ public class Main extends JFrame implements ActionListener
 	JTextArea console_area = new JTextArea("");
 	JPanel bottomPanel = new JPanel();
 	JPanel holdAll = new JPanel();
-
+	private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	public Main() {
 		bottomPanel.setLayout(new FlowLayout());
 		bottomPanel.add(myCheckBox);
@@ -37,7 +39,10 @@ public class Main extends JFrame implements ActionListener
 
 		holdAll.setLayout(new BorderLayout());
 		holdAll.add(bottomPanel, BorderLayout.SOUTH);
-		holdAll.add(code_area, BorderLayout.NORTH);
+		JScrollPane sc = new JScrollPane(code_area);
+		holdAll.add(sc, BorderLayout.NORTH);
+		console_area.setEditable(false);
+		console_area.setBackground(new Color(227,227,227));
 		holdAll.add(console_area, BorderLayout.CENTER);
 
 		getContentPane().add(holdAll, BorderLayout.CENTER);

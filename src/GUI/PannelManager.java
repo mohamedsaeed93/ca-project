@@ -3,6 +3,8 @@ package GUI;
 public class PannelManager {
 	private static MainPanel mainPanel;
 	private static SidePanel sidePanel;
+	private static CenterPanel centerPanel;
+	private static ConsolPanel consolPanel;
 	
 	static MainPanel getMainPanel() {
 		if (mainPanel == null) {
@@ -16,5 +18,18 @@ public class PannelManager {
 			sidePanel = new SidePanel();
 		}
 		return sidePanel;
+	}
+	
+	static CenterPanel getCenterPanel() {
+		if (centerPanel == null) {
+			centerPanel = new CenterPanel();
+		}
+		return centerPanel;
+	}
+	static ConsolPanel getConsolPanel() {
+		if (consolPanel == null) {
+			consolPanel = new ConsolPanel();
+		}
+		return consolPanel;
 	}
 }

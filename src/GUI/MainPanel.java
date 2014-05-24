@@ -1,6 +1,6 @@
 package GUI;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,22 +17,14 @@ public class MainPanel extends JPanel{
 
 	public MainPanel() {
 		this.setVisible(true);
-		GridLayout layout = new GridLayout();
-		layout.setRows(1);
-		layout.setColumns(3);
-		this.setLayout(new GridLayout(1, 3));
+		this.setLayout(new BorderLayout());
 		setConfigurations();
 	}
 
 	private void setConfigurations() {
-		add(PannelManager.getSidePanel());
-		addTextField();
-	}
-
-	private void addTextField() {
 		
-		JTextArea userField = new JTextArea("User:");
-        userField.setEditable(false);
-        add(userField);
+		add(PannelManager.getSidePanel(), BorderLayout.WEST);
+		add(PannelManager.getCenterPanel(), BorderLayout.CENTER);
+		add(PannelManager.getConsolPanel(), BorderLayout.EAST);
 	}
 }
