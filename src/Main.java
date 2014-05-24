@@ -118,28 +118,37 @@ public class Main extends JFrame implements ActionListener {
 		}
 	}
 
-	
-
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == run){
 			String instructions = code_area.getText();
-			PrintWriter writer = null;
-			print(writer,instructions);
+			PrintWriter writer;
+			try {
+				writer = new PrintWriter("Instructions", "UTF-8");
+				writer.println(instructions);
+				writer.flush();
+				writer.close();
+			} catch (FileNotFoundException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			} catch (UnsupportedEncodingException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
 			
 			if (myCheckBox.isSelected())
 			{
 				System.err.println("pipelined");
 				try {
 					DataPath.getInstance().PiplineStart(0);
+					console_area.setText(null);
+					console_area.append("compilation successful\n");
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					console_area.setText(null);
+					console_area.append(e1.getMessage());
 				} catch (SyntaxErrorException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					console_area.setText(null);
+					console_area.append(e1.getMessage());
 				}
-				console_area.setText(null);
-				console_area.append("compilation successful\n");
 				try {
 					Object[][] data = {
 						    {"$0", Register.getValue("$0"),},
@@ -178,8 +187,8 @@ public class Main extends JFrame implements ActionListener {
 					rightPanel.repaint();
 
 				} catch (NoSuchRegisterException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					console_area.setText(null);
+					console_area.append(e1.getMessage());
 				}
 
 			}else {
@@ -187,16 +196,16 @@ public class Main extends JFrame implements ActionListener {
 				try {
 					try {
 						DataPath.getInstance().start(0);
+						console_area.setText(null);
+						console_area.append("compilation successful\n");
 					} catch (SyntaxErrorException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						console_area.setText(null);
+						console_area.append(e1.getMessage());
 					}
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					console_area.setText(null);
+					console_area.append(e1.getMessage());
 				}
-				console_area.setText(null);
-				console_area.append("compilation successful\n");
 				try {
 					Object[][] data = {
 						    {"$0", Register.getValue("$0"),},
@@ -236,14 +245,14 @@ public class Main extends JFrame implements ActionListener {
 
 					
 				} catch (NoSuchRegisterException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					console_area.setText(null);
+					console_area.append(e1.getMessage());
 				}
 			}
 		}
-
 	}
 	
+
 	public static void main(String[] args) throws NoSuchRegisterException {
 		 new Main();
 	}
