@@ -4,7 +4,7 @@ public class PannelManager {
 	private static MainPanel mainPanel;
 	private static SidePanel sidePanel;
 	private static CenterPanel centerPanel;
-	private static ConsolPanel consolPanel;
+	private static RightPanel consolPanel;
 	
 	static MainPanel getMainPanel() {
 		if (mainPanel == null) {
@@ -26,9 +26,9 @@ public class PannelManager {
 		}
 		return centerPanel;
 	}
-	static ConsolPanel getConsolPanel() {
+	static RightPanel getConsolPanel() {
 		if (consolPanel == null) {
-			consolPanel = new ConsolPanel();
+			consolPanel = new RightPanel();
 		}
 		return consolPanel;
 	}
