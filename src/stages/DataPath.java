@@ -41,6 +41,7 @@ public class DataPath {
 			SyntaxErrorException {
 		if (address < InsSet.getSize())
 			PC = address;
+		reset();
 		CLOCK = 0;
 		Register.reset();
 		while (!InsSet.isFinished(PC)) {
@@ -61,6 +62,7 @@ public class DataPath {
 	public void PiplineStart(int address) throws InterruptedException,
 			SyntaxErrorException {
 		CLOCK = 0;
+		reset();
 		if (address < InsSet.getSize())
 			PC = address;
 		Register.reset();
@@ -116,4 +118,10 @@ public class DataPath {
 		getInstance().PC++;
 	}
 
+	public static void reset() throws SyntaxErrorException{
+		getInstance().FetchedInstruction = null;
+		getInstance().DecodedInstruction = null;
+		getInstance().ExecutedInstruction = null;
+		getInstance().MemoryInstruction= null;
+	}
 }
